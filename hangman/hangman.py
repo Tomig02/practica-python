@@ -46,21 +46,39 @@ HANGMAN_PICS = ['''
  / \  |
      ===''']
 
-words = {'Colors':'red orange yellow green blue indigo violet white black brown'.split(),
-'Shapes':'square triangle rectangle circle ellipse rhombus trapazoid chevron pentagon hexagon septagon octogon'.split(),
-'Fruits':'apple orange lemon lime pear watermelon grape grapefruit cherry banana cantalope mango strawberry tomato'.split(),
-'Animals':'bat bear beaver cat cougar crab deer dog donkey duck eagle fish frog goat leech lion lizard monkey moose mouse otter owl panda python rabbit rat shark sheep skunk squid tiger turkey turtle weasel whale wolf wombat zebra'.split()}
-
+words = {
+    'Colors':
+        [('red orange yellow brown'.split(), 'es un color calido'),
+        ('green blue indigo violet'.split(), 'es un color frio'),
+        ('white black'.split(), 'es un color?')],
+    'Shapes': 
+        [('triangle  circle ellipse  chevron'.split(), 'tiene menos de cuatro lados'),
+        ('square rectangle rhombus trapazoid', 'tiene cuatro lados'), 
+        ('pentagon hexagon septagon octogon'.split(), 'tiene mas de cuatro lados')],
+    'Fruits':
+        [('apple orange watermelon grape cherry tomato grapefruit cantalope'.split(), 'tiene forma redonda'),
+        ('lemon lime pear banana mango  strawberry'.split(), 'no tiene forma redonda')],
+    'Animals':
+        [('bear deer donkey lion moose panda zebra cougar tiger'.split(), 'es grande y esta cubierto de pelo'),
+        ('beaver cat dog  goat  monkey  mouse otter rabbit rat wolf wombat  weasel skunk'.split(), 'es pequeño o mediano y esta cubierto de pelo'), 
+        ('bat crab fish frog lizard python shark sheep squid turtle whale leech'.split(), 'no tiene ni pelo ni plumas'), 
+        ('duck eagle owl turkey'.split(), 'esta cubierto de plumas')]
+}
+    
 def getRandomWord(wordDict):
     ''' This function returns a random string from the passed dictionary of lists of strings, and the key also.'''
     
     # First, randomly select a key from the dictionary:
     wordKey = random.choice(list(wordDict.keys()))
 
-    # Second, randomly select a word from the key's list in the dictionary:
+    # Second, randomly select a touple from the key's list in the dictionary:
     wordIndex = random.randint(0, len(wordDict[wordKey]) - 1)
 
-    return [wordDict[wordKey][wordIndex], wordKey]
+    # Third, randomly select a word from the list and save the hint
+    tupleIndex = random.randint(0, len(wordDict[wordKey][wordIndex][0]) - 1)
+    hint = wordDict[wordKey][wordIndex][1]
+
+    return [wordDict[wordKey][wordIndex][0][tupleIndex], wordKey, hint]
 
 def displayBoard(missedLetters, correctLetters, secretWord):
     print(HANGMAN_PICS[len(missedLetters)])
@@ -119,12 +137,11 @@ if difficulty == 'H':
 
 missedLetters = ''
 correctLetters = ''
-secretWord, secretSet = getRandomWord(words)
+secretWord, secretSet, hint = getRandomWord(words)
 gameIsDone = False
 
 while True:
-    print('The secret word is in the set: ' + secretSet)
-    print('Hint: ')
+    print('The secret word is in the set: ' + secretSet + '   Hint: ' + hint)
     displayBoard(missedLetters, correctLetters, secretWord)
 
     # Let the player type in a letter.
@@ -157,6 +174,6 @@ while True:
             missedLetters = ''
             correctLetters = ''
             gameIsDone = False
-            secretWord, secretSet = getRandomWord(words)
+            secretWord, secretSet, hint= getRandomWord(words)
         else:
             break
