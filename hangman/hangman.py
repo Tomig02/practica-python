@@ -53,7 +53,7 @@ words = {
         ('white black'.split(), 'es un color?')],
     'Shapes': 
         [('triangle  circle ellipse  chevron'.split(), 'tiene menos de cuatro lados'),
-        ('square rectangle rhombus trapazoid', 'tiene cuatro lados'), 
+        ('square rectangle rhombus trapazoid'.split(), 'tiene cuatro lados'), 
         ('pentagon hexagon septagon octogon'.split(), 'tiene mas de cuatro lados')],
     'Fruits':
         [('apple orange watermelon grape cherry tomato grapefruit cantalope'.split(), 'tiene forma redonda'),
