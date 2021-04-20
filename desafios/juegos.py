@@ -5,7 +5,7 @@ with open("./appstore_games.csv") as juegos:
     archivo = list(csv.DictReader(juegos))
 
     for row in archivo:
-        if 'ES' in row['Languages']:
+        if (row['Price'] == '0') and ('ES' in row['Languages']):
             print(row['Name'])
     
     maximos = (sorted(archivo, key = lambda archivo: archivo['User Rating Count'], reverse= True)[:10])
