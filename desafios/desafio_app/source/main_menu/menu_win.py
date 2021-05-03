@@ -4,8 +4,8 @@ def crear():
 
     button = lambda text, key: sg.Button(text, key = key, size = (40, 3), button_color='#2f2f2f')
     layout = [
-        [button('Los cantantes mas populares de spotify', '-OP1-')],
-        [button('Los atletas olimpicos con mas medallas', '-OP2-')],
+        [button('Los cantantes con mas seguidores de spotify', '-OP1-')],
+        [button('Los atletas olimpicos con mas medallas de oro', '-OP2-')],
         [button('Cerrar', '-SALIR-')]
     ]
 

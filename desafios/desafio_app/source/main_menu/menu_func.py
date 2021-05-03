@@ -61,14 +61,14 @@ def olimpiadas_oro(cant):
 def guardar_datos(data, nombre):
 
     # crea un json con los datos creados
-    with open(f'data/{nombre}.json', mode='w') as json_file:
+    with open(f'desafios/desafio_app/data/{nombre}.json', 'w') as json_file:
         json.dump(data, json_file)
          
 
 def cargar_datos(nombre):
     data = []
     try:
-        with open(f'data/{nombre}.csv', encoding='utf-8') as archivo:
+        with open(f'desafios/desafio_app/data/{nombre}.csv', encoding='utf-8') as archivo:
             data = list(csv.DictReader(archivo))
     except:
         print("Hay un problema con el dataset")
